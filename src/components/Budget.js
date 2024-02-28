@@ -4,14 +4,21 @@ import { AppContext } from '../context/AppContext';
 
 const Budget = () => {
     // const dispatch = useDispatch();
-    const { budget, dispatch } = useContext(AppContext);
+    const { budget, spending, dispatch } = useContext(AppContext);
     const [newBudget, setNewBudget] = useState(budget);
     const handleBudgetChange = (event) => {
-        setNewBudget(event.target.value);
-        dispatch({
-            type: 'SET_BUDGET',
-            payload: event.target.value,
-        })
+        
+        if(event.target.value - budget < spending) {
+            alert("The value cannot exceed remaining funds  £"+spending);
+            // setCost("");
+            return;
+        } else{
+            setNewBudget(event.target.value);
+            dispatch({
+                type: 'SET_BUDGET',
+                payload: event.target.value,
+            })
+        }
     }
     // const handleBudgetChange = (event) => {
     //     setNewBudget(event.target.value);
