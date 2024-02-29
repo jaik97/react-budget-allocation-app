@@ -4,15 +4,21 @@ import { AppContext } from '../context/AppContext';
 
 const Budget = () => {
     // const dispatch = useDispatch();
-    const { budget, dispatch } = useContext(AppContext);
+    const { budget, expenses, dispatch } = useContext(AppContext);
     const [newBudget, setNewBudget] = useState(budget);
+    const totalExpenses = expenses.reduce((total, item) => {
+        return (total = total + item.cost);
+    }, 0);
     const handleBudgetChange = (event) => {
         
         if(event.target.value > 20000) {
             alert("The budget value cannot exceed £20,000");
             // setCost("");
             return;
-        } else{
+        } else if(event.target.value - totalExpenses < 0){
+            alert("You cannot reduce the budget value lower than the spending");
+            return;
+        }else{
             setNewBudget(event.target.value);
             dispatch({
                 type: 'SET_BUDGET',
