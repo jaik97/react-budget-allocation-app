@@ -9,14 +9,26 @@ const ChangeCurrency = () => {
         dispatch({type: 'CHG_CURRENCY', payload: event.target.value});
     };
 
-    return (
-        <select className="alert alert-success" value={currency} onChange={handleCurrencyChange}>
-            <option value="$">$ Dollar</option>
-            <option value="£">£ Pound</option>
-            <option value="€">€ Euro</option>
-            <option value="₹">₹ Rupee</option>
-        </select>
+    const options = [
+        {value: '$', label: '$ Dollar'},
+        {value: '£', label: '£ Pound'},
+        {value: '€', label: '€ Euro'},
+        {value: '₹', label: '₹ Rupee'},
+    ];
 
+    return (
+        <div className='alert alert-success' style={{height: 'auto', width: 'auto'}}>
+            <span>Currency </span>
+            <select 
+            value={currency}
+            onChange={handleCurrencyChange}
+            style={{color: 'black', background: '#d8e4dc', height: '30px', width: '200px'}}
+            >
+                {options.map((option) => (
+                    <option key={option.value} value={option.value}>{option.label}</option>
+                ))}
+            </select>
+        </div>
     );
 };
 
