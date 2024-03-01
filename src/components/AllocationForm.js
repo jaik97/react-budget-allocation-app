@@ -60,7 +60,7 @@ const AllocationForm = (props) => {
                   </select>
 
                     <div className="input-allocation">
-                    <label for="amount" style={{ marginLeft: '2rem' }}>{currency}:</label>
+                    <label for="amount" style={{ marginLeft: '2rem' }}>{currency}</label>
                         <input
                             required='required'
                             type='number'
